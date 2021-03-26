@@ -1,0 +1,1 @@
+{"version":"1.0.0","name":"sample-deployment","dependencies":{"express":{"version":"4.17.1"},"pug":{"version":"3.0.2"}}}
