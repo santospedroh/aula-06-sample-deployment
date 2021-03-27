@@ -54,3 +54,22 @@ Você pode utilizar `Deployment Slots` para isolar ambientes de deployment, real
 4. **Clone settings from:** Do not clone settings
 5. Clique `Add`
 6. Siga o mesmo procedimento e crie um novo slot chamado `aula-cd-<seu_usuario>-HOM`
+
+## 3. Configurando o deployment para promoção de artefatos
+
+### 3.1 Criando novos ambientes (Environments)
+
+1. No seu repositório no GitHub selecione `Settings` > `Environments`
+2. Clique em `New environment` para criar um novo ambiente de deployment
+3. Dê o nome de `QA` e clique em `Configure environment`
+4. Na seção **Environment secrets**, clique em `Add Secret`
+5. **Name:** AZURE_WEBAPP_PUBLISH_PROFILE
+6. Agora volte para a sua conta da Azure, vá em **Deployment slots** e selecione o slot de QA (terminado em `QA`)
+7. Clique em `Get publish profile`e baixe o arquivo.
+8. Abra o arquivo no VSCode e cole o seu conteúdo no campo `Value` do secret que criamos no GitHub
+   
+Repita o processo processo para criar um novo ambiente chamado `HOM`. Não há problema em os secrets terem o mesmo nome. :question: Por que?
+
+### 3.2 Ajustando o workflow
+
+O nosso workflow agora precisa refletir a capacidade de fazer a promoção do nosso build entre ambientes.
