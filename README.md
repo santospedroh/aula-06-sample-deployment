@@ -50,10 +50,10 @@ Você pode utilizar `Deployment Slots` para isolar ambientes de deployment, real
 
 1. Selecione a opção `Deployment slots`
 2. Você verá que já existe um slot com o *label* `Production`. Vamos criar novos slots. Selecione a opção `Add Slot`
-3. **Nome:** aula-cd-<seu_usuario>-QA
-4. **Clone settings from:** Do not clone settings
+3. **Nome:** qa
+4. **Clone settings from:** aula-cd-<seu_usuario>
 5. Clique `Add`
-6. Siga o mesmo procedimento e crie um novo slot chamado `aula-cd-<seu_usuario>-HOM`
+6. Siga o mesmo procedimento e crie um novo slot chamado `hom`
 
 ## 3. Configurando o deployment para promoção de artefatos
 
