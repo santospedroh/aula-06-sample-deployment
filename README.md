@@ -189,3 +189,22 @@ jobs:
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_abc7038203244546b20cf50d0ab5bd7e }}
         package: .
 ```
+
+#### :tada: Perfeito! Nosso app agora passa pelos ambientes de QA e de Homologação antes de chegar em Produção
+
+#### :question: Mas e se durante a fase de QA a equipe encontrar algum problema na aplicação e não quiser promovê-la para Homologação?
+
+## 3.3 Configurando aprovações manuais
+
+Agora vamos configurar os nossos ambientes para que sejam necessárias revisões e aprovações antes de ser realizado o deploy.
+
+1. No seu repositório vá em `Settings` > `Environments`
+2. Selecione o ambiente `HOM`
+3. Marque o *checkbox* `Required reviewers`
+4. Adicione o seu próprio usuário no campo de texto e clique em `Save protectioin rules`
+
+Repita o procedimento para o ambiente `production` mas não para o ambiente `QA`.
+
+#### :question: Execute o workflow novamente. Qual a diferença?
+
+O nosso workflow está pronto para ser implementado em um ambiente de trabalho real! :wink:
