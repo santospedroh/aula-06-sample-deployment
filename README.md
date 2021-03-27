@@ -77,7 +77,7 @@ O nosso workflow agora precisa refletir a capacidade de fazer a promoção do no
 1. Renomeie o seu job de `deploy` para `deploy-to-production`
 2. Copie todo o conteúdo do job `deploy-to-production` e cole acima dele mesmo renomeando o job para `deploy-to-hom`
 3. Substitua o valor da variável `environment.name` por `HOM`
-4. Substitua o valor de `slot-name` por `aula-cd-pedrolacerda-aula-cd-<seu_usuario>-HOM`
+4. Substitua o valor de `slot-name` por `hom`
 5. Substitua o valor de `publish-profile` por `${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}`
 
 Repita o processo para criar um job `deploy-to-qa` antes de `deploy-to-hom`
@@ -141,7 +141,7 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ env.app-name }}
-        slot-name: 'aula-cd-pedrolacerda-aula-cd-pedrolacerda-QA'
+        slot-name: 'qa'
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
         package: .
   
@@ -163,7 +163,7 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ env.app-name }}
-        slot-name: 'aula-cd-pedrolacerda-aula-cd-pedrolacerda-HOM'
+        slot-name: 'hom'
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
         package: .
 
