@@ -24,7 +24,7 @@ Precisamos criar um [Azure App Service](https://docs.microsoft.com/azure/app-ser
 
 :tada: Pronto, já temos recursos em nuvem para receber nossa aplicação!
 
-Agora precisamos criar um workflow para entregar o nosso app na nuvem. 
+Agora precisamos criar um workflow para entregar o nosso app na nuvem.
 
 ### 2.3 Deployment Center
 
