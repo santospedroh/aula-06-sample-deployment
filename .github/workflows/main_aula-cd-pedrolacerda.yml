@@ -33,11 +33,11 @@ jobs:
         npm run build --if-present
         npm run test --if-present
 
-    - name: Upload artifact for deployment job
-      uses: actions/upload-artifact@v2
-      with:
-        name: node-app
-        path: .
+    # - name: Upload artifact for deployment job
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: node-app
+    #     path: .
     
     - name: 'Deploy to Azure Web App'
       id: deploy-to-webapp
@@ -113,4 +113,3 @@ jobs:
   #       slot-name: 'production'
   #       publish-profile: ${{ secrets.AzureAppService_PublishProfile_abc7038203244546b20cf50d0ab5bd7e }}
   #       package: .
-  
