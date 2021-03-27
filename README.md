@@ -39,3 +39,18 @@ Vamos usar o _wizard_ da Azure para nos ajudar na criação do workflow.
 7. **Runtime stack:** Node
 8. **Version:** Node 14 LTS
 9. Clique `Save`
+
+#### :question: O que mudou no seu repositório?
+
+:rotating-light: Nosso app está chegando na nuvem, como queríamos, mas direto no ambiente de produção. Como fazemos para que ele escale pelos ambientes de **Testes/QA** e **Homologação** antes de chegar em produção?
+
+### 2.4 Deployment Slots
+
+Você pode utilizar `Deployment Slots` para isolar ambientes de deployment, realizar testes A/B ou organizar a sua entrega de aplicações com estratégias Blue/Green (veremos em mais detalhes na próxima aula)
+
+1. Selecione a opção `Deployment slots`
+2. Você verá que já existe um slot com o *label* `Production`. Vamos criar novos slots. Selecione a opção `Add Slot`
+3. **Nome:** aula-cd-<seu_usuario>-QA
+4. **Clone settings from:** Do not clone settings
+5. Clique `Add`
+6. Siga o mesmo procedimento e crie um novo slot chamado `aula-cd-<seu_usuario>-HOM`
