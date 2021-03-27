@@ -52,7 +52,7 @@ jobs:
       with:
         app-name: 'aula-cd-pedrolacerda'
         slot-name: 'aula-cd-pedrolacerda-aula-cd-pedrolacerda-QA'
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_abc7038203244546b20cf50d0ab5bd7e }}
         package: .
   
   deploy-to-hom:
@@ -74,7 +74,7 @@ jobs:
       with:
         app-name: 'aula-cd-pedrolacerda'
         slot-name: 'aula-cd-pedrolacerda-aula-cd-pedrolacerda-HOM'
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_abc7038203244546b20cf50d0ab5bd7e }}
         package: .
 
   deploy-to-production:
