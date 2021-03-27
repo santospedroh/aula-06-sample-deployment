@@ -205,6 +205,6 @@ Agora vamos configurar os nossos ambientes para que sejam necessárias revisões
 
 Repita o procedimento para o ambiente `production` mas não para o ambiente `QA`.
 
-#### :question: Execute o workflow novamente. Qual a diferença?
+### :question: Execute o workflow novamente. Qual a diferença?
 
 O nosso workflow está pronto para ser implementado em um ambiente de trabalho real! :wink:
