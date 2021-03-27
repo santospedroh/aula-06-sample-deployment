@@ -42,7 +42,7 @@ Vamos usar o _wizard_ da Azure para nos ajudar na criação do workflow.
 
 #### :question: O que mudou no seu repositório?
 
-:rotating-light: Nosso app está chegando na nuvem, como queríamos, mas direto no ambiente de produção. Como fazemos para que ele escale pelos ambientes de **Testes/QA** e **Homologação** antes de chegar em produção?
+🚨 Nosso app está chegando na nuvem, como queríamos, mas direto no ambiente de produção. Como fazemos para que ele escale pelos ambientes de **Testes/QA** e **Homologação** antes de chegar em produção?
 
 ### 2.4 Deployment Slots
 
