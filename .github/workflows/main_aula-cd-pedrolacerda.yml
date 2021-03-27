@@ -45,7 +45,7 @@ jobs:
       with:
         app-name: ${{ env.app-name }}
         slot-name: 'aula-cd-pedrolacerda-aula-cd-pedrolacerda-QA'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_abc7038203244546b20cf50d0ab5bd7e }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
         package: .
         
   # deploy-to-qa:
