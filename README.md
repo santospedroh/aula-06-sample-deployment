@@ -82,7 +82,7 @@ O nosso workflow agora precisa refletir a capacidade de fazer a promoção do no
 
 Repita o processo para criar um job `deploy-to-qa` antes de `deploy-to-hom`
 
-O seu workflow final deve ficar parecido com o abaixo (lembre-se de atualizar o valor do nome do app para o que você criou):
+O seu workflow final deve ficar parecido com o abaixo (❗ lembre-se de atualizar o valor do nome do app para o que você criou e o nome dos secrets):
 
 ```yml
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
