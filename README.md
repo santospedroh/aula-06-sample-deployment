@@ -67,9 +67,125 @@ Você pode utilizar `Deployment Slots` para isolar ambientes de deployment, real
 6. Agora volte para a sua conta da Azure, vá em **Deployment slots** e selecione o slot de QA (terminado em `QA`)
 7. Clique em `Get publish profile`e baixe o arquivo.
 8. Abra o arquivo no VSCode e cole o seu conteúdo no campo `Value` do secret que criamos no GitHub
-   
+
 Repita o processo processo para criar um novo ambiente chamado `HOM`. Não há problema em os secrets terem o mesmo nome. :question: Por que?
 
 ### 3.2 Ajustando o workflow
 
-O nosso workflow agora precisa refletir a capacidade de fazer a promoção do nosso build entre ambientes.
+O nosso workflow agora precisa refletir a capacidade de fazer a promoção do nosso build entre ambientes. Para isso precisamos adicionar dois passos após o build e antes do deploy em produção.
+
+1. Renomeie o seu job de `deploy` para `deploy-to-production`
+2. Copie todo o conteúdo do job `deploy-to-production` e cole acima dele mesmo renomeando o job para `deploy-to-hom`
+3. Substitua o valor da variável `environment.name` por `HOM`
+4. Substitua o valor de `slot-name` por `aula-cd-pedrolacerda-aula-cd-<seu_usuario>-HOM`
+5. Substitua o valor de `publish-profile` por `${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}`
+
+Repita o processo para criar um job `deploy-to-qa` antes de `deploy-to-hom`
+
+O seu workflow final deve ficar parecido com o abaixo (lembre-se de atualizar o valor do nome do app para o que você criou):
+
+```yml
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy Node.js app to Azure Web App - aula-cd-pedrolacerda
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  app-name: aula-cd-pedrolacerda
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Node.js version
+      uses: actions/setup-node@v1
+      with:
+        node-version: '14.x'
+
+    - name: npm install, build, and test
+      run: |
+        npm install
+        npm run build --if-present
+        npm run test --if-present
+
+    - name: Upload artifact for deployment job
+      uses: actions/upload-artifact@v2
+      with:
+        name: node-app
+        path: .
+        
+  deploy-to-qa:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'QA'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v2
+      with:
+        name: node-app
+
+    - name: 'Deploy to Azure Web App'
+      id: deploy-to-webapp
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.app-name }}
+        slot-name: 'aula-cd-pedrolacerda-aula-cd-pedrolacerda-QA'
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: .
+  
+  deploy-to-hom:
+    runs-on: ubuntu-latest
+    needs: deploy-to-qa
+    environment:
+      name: 'HOM'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v2
+      with:
+        name: node-app
+
+    - name: 'Deploy to Azure Web App'
+      id: deploy-to-webapp
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.app-name }}
+        slot-name: 'aula-cd-pedrolacerda-aula-cd-pedrolacerda-HOM'
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: .
+
+  deploy-to-production:
+    runs-on: ubuntu-latest
+    needs: deploy-to-hom
+    environment:
+      name: 'production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v2
+      with:
+        name: node-app
+
+    - name: 'Deploy to Azure Web App'
+      id: deploy-to-webapp
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.app-name }}
+        slot-name: 'production'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_abc7038203244546b20cf50d0ab5bd7e }}
+        package: .
+```
